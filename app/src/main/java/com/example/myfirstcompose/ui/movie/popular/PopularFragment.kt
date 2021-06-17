@@ -9,11 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myfirstcompose.Screen
 import com.example.myfirstcompose.navigate
+import com.example.myfirstcompose.repository.Repository
 import com.example.myfirstcompose.ui.movie.ViewModelFactory
 import com.example.myfirstcompose.ui.theme.MyFirstComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PopularFragment : Fragment() {
-    private val viewModel: PopularViewModel by viewModels { ViewModelFactory() }
+
+    @Inject
+    lateinit var repository: Repository
+    private val viewModel: PopularViewModel by viewModels { ViewModelFactory(repository) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +39,9 @@ class PopularFragment : Fragment() {
                     PopularScreen(
                         onNavigationEvent = {
                             viewModel.navToTopMovie()
+                        },
+                        {
+
                         }
                     )
                 }

@@ -226,7 +226,7 @@ fun textButtonSize(buttonSize: ButtonSize): TextUnit {
 @Composable
 fun PreviewButtonPrimaryYellow() {
     MyButton(
-        isLoading = true,
+        isLoading = false,
         onClick = { /*TODO*/ },
         text = "Button",
         buttonColor = ButtonColor.Yellow,
