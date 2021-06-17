@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/top_fragment">
+    <fragment
+        android:id="@+id/top_fragment"
+        android:name="com.example.myfirstcompose.ui.movie.TopFragment"
+        android:label="Top Movie">
+    </fragment>
+    <fragment
+        android:id="@+id/popular_fragment"
+        android:name="com.example.myfirstcompose.ui.movie.PopularFragment"
+        android:label="Popular">
+    </fragment>
+</navigation>
