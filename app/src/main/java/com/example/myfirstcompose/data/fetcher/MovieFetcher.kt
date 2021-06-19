@@ -7,5 +7,5 @@ import com.example.myfirstcompose.ui.util.Resource
 
 interface MovieFetcher  {
   @WorkerThread
-  fun fetchMovie(apiKey :String, page:Int, restApi: RestApi) : Resource<TopMovieResponse>
+  suspend fun fetchMovie(apiKey :String, page:Int, restApi: RestApi) : Resource<TopMovieResponse>
 }

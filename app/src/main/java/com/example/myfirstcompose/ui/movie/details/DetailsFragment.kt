@@ -35,7 +35,7 @@ class DetailsFragment : Fragment() {
             }
         }
 
-        val res = MovieResponse(2,"","","","","","", R.drawable.flash)
+        val res = MovieResponse(2,"","","","","","")
 
         return ComposeView(requireContext()).apply {
             setContent {

@@ -14,12 +14,10 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myfirstcompose.Screen
 import com.example.myfirstcompose.navigate
-import com.example.myfirstcompose.repository.Repository
-import com.example.myfirstcompose.ui.movie.ViewModelFactory
 import com.example.myfirstcompose.ui.theme.MyFirstComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,18 +41,15 @@ class TopFragment : Fragment() {
             }
         }
 
-        viewModel.loadMovies()
-
-
         return ComposeView(requireContext()).apply {
             setContent {
                 MyFirstComposeTheme {
-                    TopScreenButtons(
+/*                    TopScreenButtons(
                         onNavigationEvent = {
                             viewModel.navToPopularMovie()
                         }
-                    )
-                    DisplayItems(viewModel){
+                    )*/
+                    DisplayItems(viewModel) {
                     }
                 }
             }
@@ -64,20 +59,18 @@ class TopFragment : Fragment() {
 
 
 @Composable
-fun DisplayItems(viewModel:TopViewModel, selectedItem: (Int) -> Unit) {
+fun DisplayItems(viewModel: TopViewModel, selectedItem: (Int) -> Unit) {
 
-    val movies = remember { viewModel.movieList.value }
+    val movies = remember { viewModel.movieList }
 
-    if(movies.isNotEmpty()){
-        LazyColumn(
-            contentPadding = PaddingValues(horizontal = 16.dp,vertical = 8.dp)
-        ) {
-            items(
-                items = movies,
-                itemContent = {
-                    TopScreenListItems(movie = it, selectedItem)
-                }
-            )
-        }
+    LazyColumn(
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        items(
+            items = movies,
+            itemContent = {
+                TopScreenListItems(movie = it, selectedItem)
+            }
+        )
     }
 }

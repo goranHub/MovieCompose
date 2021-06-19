@@ -1,5 +1,6 @@
 package com.example.myfirstcompose.data.fetcher
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.example.myfirstcompose.data.RestApi
 import com.example.myfirstcompose.data.response.movie.TopMovieResponse
@@ -8,7 +9,7 @@ import javax.inject.Inject
 
 class MovieFetcherImpl @Inject constructor() : MovieFetcher {
     @WorkerThread
-    override fun fetchMovie(
+    override suspend fun fetchMovie(
         apiKey: String,
         page: Int,
         restApi: RestApi
@@ -16,6 +17,7 @@ class MovieFetcherImpl @Inject constructor() : MovieFetcher {
         val response = try {
             restApi.getTopRated(apiKey, page.toString())
         } catch (e: Exception) {
+            Log.e("MovieFetcherImpl", e.localizedMessage)
             return Resource.Error("An unknown error occured.")
         }
         return Resource.Success(response)

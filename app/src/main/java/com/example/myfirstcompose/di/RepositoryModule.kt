@@ -1,6 +1,7 @@
 package com.example.myfirstcompose.di
 
 import com.example.myfirstcompose.data.RestApi
+import com.example.myfirstcompose.data.fetcher.MovieFetcher
 import com.example.myfirstcompose.repository.Repository
 import dagger.Module
 import dagger.Provides
@@ -13,5 +14,5 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideRepository(restapi: RestApi)  = Repository(restapi)
+    fun provideRepository(restapi: RestApi, movieFetcher: MovieFetcher)  = Repository(restapi, movieFetcher)
 }

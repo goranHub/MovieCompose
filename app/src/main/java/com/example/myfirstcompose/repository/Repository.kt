@@ -1,9 +1,20 @@
 package com.example.myfirstcompose.repository
 
 import com.example.myfirstcompose.data.RestApi
+import com.example.myfirstcompose.data.fetcher.MovieFetcher
+import com.example.myfirstcompose.data.response.movie.TopMovieResponse
+import com.example.myfirstcompose.ui.movie.API_KEY
+import com.example.myfirstcompose.ui.util.Resource
+
+class Repository(val restApi: RestApi, val movieFetcher: MovieFetcher){
 
 
-class Repository(val restApi: RestApi){
-
-
+    suspend fun getMovieList(): Resource<TopMovieResponse> {
+        val response = try {
+            movieFetcher.fetchMovie(API_KEY, 1, restApi)
+        } catch(e: Exception) {
+            return Resource.Error("An unknown error occured.")
+        }
+        return response
+    }
 }

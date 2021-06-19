@@ -1,20 +1,25 @@
 package com.example.myfirstcompose.data.response.movie
 
-import com.example.myfirstcompose.R
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import androidx.annotation.Keep
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+@Keep
+@JsonClass(generateAdapter = true)
 data class MovieResponse(
-    @SerializedName("id")
+    @Json(name="id")
     val movieID: Int,
-    @SerializedName("original_title")
+    @Json(name="original_title")
     val originalTitle: String,
     val overview: String,
-    @SerializedName("poster_path")
+    @Json(name="poster_path")
     val posterPath: String,
     val popularity: String,
-    @SerializedName("release_date")
+    @Json(name="release_date")
     val releaseDate: String,
-    @SerializedName("title")
-    val title: String?,
-    val posterPathFlash: Int
-)
+    @Json(name="title")
+    val title: String?
+): Parcelable

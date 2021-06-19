@@ -35,15 +35,14 @@ fun DetailsScreen(
                 .verticalScroll(scrollState)
                 .padding(10.dp)
         ) {
-            Image(
-               // painter = painterResource(id = movie.posterPath.toInt()),
-               painter = painterResource(id = movie.posterPathFlash),
+  /*          Image(
+                painter = painterResource(id = movie.posterPath.toInt()),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(4.dp)),
                 contentScale = ContentScale.Fit
-            )
+            )*/
             Spacer(modifier = Modifier.height(16.dp))
             Text(
             //    text = movie.originalTitle,
