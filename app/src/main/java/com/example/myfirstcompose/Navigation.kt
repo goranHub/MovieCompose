@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import java.security.InvalidParameterException
 
-enum class Screen { TopMovie, Popular }
+enum class Screen { TopMovie, Popular, Details }
 
 fun Fragment.navigate(to: Screen, from: Screen) {
     if (to == from) {
@@ -32,6 +32,9 @@ fun Fragment.navigate(to: Screen, from: Screen) {
         }
         Screen.Popular -> {
             findNavController().navigate(R.id.popular_fragment)
+        }
+        Screen.Details -> {
+            findNavController().navigate(R.id.details_fragment)
         }
     }
 }

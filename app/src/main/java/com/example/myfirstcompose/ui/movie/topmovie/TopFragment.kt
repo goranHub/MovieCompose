@@ -5,17 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myfirstcompose.Screen
-import com.example.myfirstcompose.data.response.movie.TopMovieResponse
 import com.example.myfirstcompose.navigate
 import com.example.myfirstcompose.repository.Repository
 import com.example.myfirstcompose.ui.movie.ViewModelFactory
 import com.example.myfirstcompose.ui.theme.MyFirstComposeTheme
-import com.example.myfirstcompose.ui.util.mutableValue.MutableValue
-import com.example.myfirstcompose.ui.util.mutableValue.Value
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,8 +28,8 @@ import javax.inject.Inject
 class TopFragment : Fragment() {
 
     @Inject
-    lateinit var repository: Repository
-    private val viewModel: TopViewModel by viewModels { ViewModelFactory(repository) }
+    lateinit var topViewModelFactory: TopViewModelFactory
+    private val viewModel: TopViewModel by viewModels { provideFactory(topViewModelFactory) }
 
     @SuppressLint("CheckResult")
     override fun onCreateView(
@@ -38,24 +43,41 @@ class TopFragment : Fragment() {
             }
         }
 
-/*        viewModel.loadTopMovies()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { System.out.println("Subscribe") }*/
-
-        val modelRes : Value<TopMovieResponse> = MutableValue(TopMovieResponse(333))
+        viewModel.loadMovies()
 
 
         return ComposeView(requireContext()).apply {
             setContent {
                 MyFirstComposeTheme {
-                    TopScreen(
-                        viewModel.loadTopMovies(), //response from api rxJava
+                    TopScreenButtons(
                         onNavigationEvent = {
                             viewModel.navToPopularMovie()
-                        },modelRes)
+                        }
+                    )
+                    DisplayItems(viewModel){
+                    }
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+fun DisplayItems(viewModel:TopViewModel, selectedItem: (Int) -> Unit) {
+
+    val movies = remember { viewModel.movieList.value }
+
+    if(movies.isNotEmpty()){
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp,vertical = 8.dp)
+        ) {
+            items(
+                items = movies,
+                itemContent = {
+                    TopScreenListItems(movie = it, selectedItem)
+                }
+            )
         }
     }
 }

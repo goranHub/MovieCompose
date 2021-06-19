@@ -14,4 +14,9 @@
         android:name="com.example.myfirstcompose.ui.movie.popular.PopularFragment"
         android:label="Popular">
     </fragment>
+    <fragment
+        android:id="@+id/details_fragment"
+        android:name="com.example.myfirstcompose.ui.movie.details.DetailsFragment"
+        android:label="Details">
+    </fragment>
 </navigation>

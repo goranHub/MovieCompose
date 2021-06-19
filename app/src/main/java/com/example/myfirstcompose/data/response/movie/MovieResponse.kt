@@ -1,5 +1,6 @@
 package com.example.myfirstcompose.data.response.movie
 
+import com.example.myfirstcompose.R
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
@@ -14,5 +15,6 @@ data class MovieResponse(
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("title")
-    val title: String?
+    val title: String?,
+    val posterPathFlash: Int
 )

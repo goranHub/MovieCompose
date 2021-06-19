@@ -1,15 +1,11 @@
 package com.example.myfirstcompose.di
 
 import com.example.myfirstcompose.data.RestApi
-import com.example.myfirstcompose.data.response.movie.TopMovieResponse
-import com.example.myfirstcompose.repository.Repository
-import com.example.myfirstcompose.ui.movie.API_KEY
 import com.example.myfirstcompose.ui.movie.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
