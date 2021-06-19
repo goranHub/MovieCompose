@@ -16,9 +16,13 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(PopularViewModel::class.java)) {
             return PopularViewModel(repository) as T
         }
-        if (modelClass.isAssignableFrom(TopViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
             return DetailsViewModel(repository) as T
         }
+
+     /*   if (modelClass.isAssignableFrom(TopViewModel::class.java)) {
+            return TopViewModel(repository) as T
+        }*/
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 

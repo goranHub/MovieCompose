@@ -11,7 +11,7 @@ import com.example.myfirstcompose.Screen
 import com.example.myfirstcompose.navigate
 import com.example.myfirstcompose.repository.Repository
 import com.example.myfirstcompose.ui.movie.ViewModelFactory
-import com.example.myfirstcompose.ui.theme.MyFirstComposeTheme
+import com.example.myfirstcompose.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class PopularFragment : Fragment() {
 
         return ComposeView(requireContext()).apply {
             setContent {
-                MyFirstComposeTheme {
+              //  AppTheme {
                     PopularScreen(
                         onNavigationEvent = {
                             viewModel.navToTopMovie()
@@ -45,7 +45,7 @@ class PopularFragment : Fragment() {
                         },
                         requireContext()
                     )
-                }
+                //}
             }
         }
     }

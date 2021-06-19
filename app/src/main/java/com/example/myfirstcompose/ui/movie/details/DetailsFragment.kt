@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.myfirstcompose.R
 import com.example.myfirstcompose.Screen
 import com.example.myfirstcompose.data.response.movie.MovieResponse
 import com.example.myfirstcompose.navigate
 import com.example.myfirstcompose.repository.Repository
 import com.example.myfirstcompose.ui.movie.ViewModelFactory
-import com.example.myfirstcompose.ui.theme.MyFirstComposeTheme
+import com.example.myfirstcompose.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -39,14 +38,14 @@ class DetailsFragment : Fragment() {
 
         return ComposeView(requireContext()).apply {
             setContent {
-                MyFirstComposeTheme {
+               // AppTheme {
                     DetailsScreen(
                         onNavigationEvent = {
                             viewModel.navToTopMovie()
                         },
                         res
                     )
-                }
+               // }
             }
         }
     }
