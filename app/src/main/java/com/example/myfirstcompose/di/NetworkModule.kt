@@ -26,7 +26,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitModule {
+object NetworkModule {
 
     @Provides
     @Singleton
@@ -36,7 +36,7 @@ object RetrofitModule {
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
-                HttpLoggingInterceptor.Level.BODY
+                HttpLoggingInterceptor.Level.BASIC
             }
         }
     }
@@ -45,10 +45,8 @@ object RetrofitModule {
     @Singleton
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor
-    )
-            : OkHttpClient {
+    ): OkHttpClient {
         val httpClientBuilder = OkHttpClient.Builder()
-
         if (BuildConfig.DEBUG) {
             httpClientBuilder.addInterceptor(httpLoggingInterceptor)
         }

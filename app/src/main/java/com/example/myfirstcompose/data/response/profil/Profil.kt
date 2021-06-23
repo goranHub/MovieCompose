@@ -1,4 +1,4 @@
-package mycom.learnsicoapp.movieapp.data.remote.response.profil
+package com.example.myfirstcompose.data.response.profil
 
 /**
  * @author ll4

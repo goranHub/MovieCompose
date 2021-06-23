@@ -6,23 +6,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myfirstcompose.ui.util.ButtonColor
-import com.example.myfirstcompose.ui.util.ButtonSize
-import com.example.myfirstcompose.ui.util.ButtonStyle
-import com.example.myfirstcompose.ui.util.MyButton
+import com.example.myfirstcompose.ui.util.ui.ButtonColor
+import com.example.myfirstcompose.ui.util.ui.ButtonSize
+import com.example.myfirstcompose.ui.util.ui.ButtonStyle
+import com.example.myfirstcompose.ui.util.ui.MyButton
 
 @Composable
 fun PopularScreen(
@@ -48,7 +43,7 @@ fun PopularScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 text = "Move To Top Screen",
-                buttonColor = ButtonColor.Red,
+                buttonColor = ButtonColor.Black,
                 isEnable = true,
                 buttonStyle = ButtonStyle.Outline,
                 buttonSize = ButtonSize.Large
@@ -63,7 +58,7 @@ fun PopularScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 text = "Load Popular Movies",
-                buttonColor = ButtonColor.Red,
+                buttonColor = ButtonColor.Black,
                 isEnable = true,
                 buttonStyle = ButtonStyle.Outline,
                 buttonSize = ButtonSize.Large

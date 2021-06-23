@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(ApplicationModule.Bindings::class))
+@Module(includes = [ApplicationModule.Bindings::class])
 @InstallIn(SingletonComponent::class)
 object ApplicationModule {
 
@@ -32,7 +32,6 @@ object ApplicationModule {
     return app as BaseApplication
   }
 
-
   @Module
   @InstallIn(SingletonComponent::class)
   interface Bindings {
@@ -41,6 +40,5 @@ object ApplicationModule {
     fun bindMovieFetcher(
       impl: MovieFetcherImpl
     ): MovieFetcher
-
   }
 }

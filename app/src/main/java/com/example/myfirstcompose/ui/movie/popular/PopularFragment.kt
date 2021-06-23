@@ -11,7 +11,6 @@ import com.example.myfirstcompose.Screen
 import com.example.myfirstcompose.navigate
 import com.example.myfirstcompose.repository.Repository
 import com.example.myfirstcompose.ui.movie.ViewModelFactory
-import com.example.myfirstcompose.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,17 +19,17 @@ class PopularFragment : Fragment() {
 
     @Inject
     lateinit var repository: Repository
+
     private val viewModel: PopularViewModel by viewModels { ViewModelFactory(repository) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        viewModel.navigateTo.observe(viewLifecycleOwner) { navigateToEvent ->
-            navigateToEvent.let { navigateTo ->
-                navigate(navigateTo, Screen.Popular)
-            }
+    ): View {
+
+        fun navToTopMovie() {
+            navigate(Screen.TopMovie, Screen.Popular, null)
         }
 
         return ComposeView(requireContext()).apply {
@@ -38,7 +37,7 @@ class PopularFragment : Fragment() {
               //  AppTheme {
                     PopularScreen(
                         onNavigationEvent = {
-                            viewModel.navToTopMovie()
+                            navToTopMovie()
                         },
                         {
 

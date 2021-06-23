@@ -1,25 +1,26 @@
 package com.example.myfirstcompose.ui.movie.topmovie
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myfirstcompose.BaseApplication
 import com.example.myfirstcompose.Screen
+import com.example.myfirstcompose.data.response.movie.MovieResponse
 import com.example.myfirstcompose.navigate
 import com.example.myfirstcompose.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class TopFragment : Fragment() {
 
-    //for toggling theme
     @Inject
     lateinit var application: BaseApplication
 
@@ -28,22 +29,24 @@ class TopFragment : Fragment() {
 
     private val viewModel: TopViewModel by viewModels { provideFactory(topViewModelFactory) }
 
-    @SuppressLint("CheckResult")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        viewModel.navigateTo.observe(viewLifecycleOwner) { navigateToEvent ->
-            navigateToEvent.let { navigateTo ->
-                navigate(navigateTo, Screen.TopMovie)
-            }
+        fun navToPopularMovie() {
+            navigate(Screen.Popular, Screen.TopMovie, null)
+        }
+
+        fun navToDetails(movieResponse: MovieResponse) {
+            val bundle = bundleOf( Pair("MOVIE", movieResponse))
+            navigate(Screen.Details, Screen.TopMovie, bundle)
         }
 
         return ComposeView(requireContext()).apply {
-            setContent {
 
+            setContent {
                 val loading = viewModel.loading.value
                 val movies = viewModel.movieList.value
                 val scaffoldState = rememberScaffoldState()
@@ -53,10 +56,11 @@ class TopFragment : Fragment() {
                     scaffoldState = scaffoldState,
                     darkTheme = application.isDark.value,
                 ) {
-                    TopScreenButtons(
+                    TopScreen(
                         movies,
-                        selectedItem  = {  },
-                        onNavigationEvent = {viewModel.navToPopularMovie()}
+                        selectedItem  = { navToDetails(it) },
+                        onNavigationEvent = {navToPopularMovie()},
+                        onBackClick = {}
                     )
                 }
             }

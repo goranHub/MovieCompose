@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myfirstcompose.repository.Repository
 import com.example.myfirstcompose.ui.movie.details.DetailsViewModel
 import com.example.myfirstcompose.ui.movie.popular.PopularViewModel
-import com.example.myfirstcompose.ui.movie.topmovie.TopViewModel
 
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
     val repository: Repository,
 ) : ViewModelProvider.Factory {
@@ -17,14 +17,8 @@ class ViewModelFactory(
             return PopularViewModel(repository) as T
         }
         if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
-            return DetailsViewModel(repository) as T
+            return DetailsViewModel() as T
         }
-
-     /*   if (modelClass.isAssignableFrom(TopViewModel::class.java)) {
-            return TopViewModel(repository) as T
-        }*/
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
-
 }

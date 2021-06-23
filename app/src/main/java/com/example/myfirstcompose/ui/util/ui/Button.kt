@@ -1,4 +1,4 @@
-package com.example.myfirstcompose.ui.util
+package com.example.myfirstcompose.ui.util.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
@@ -19,9 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 sealed class ButtonColor {
-    object Yellow: ButtonColor()
-    object Green: ButtonColor()
-    object Red: ButtonColor()
+    object Black: ButtonColor()
 }
 
 sealed class ButtonSize {
@@ -39,7 +37,7 @@ sealed class ButtonStyle {
 fun MyButton(
     modifier: Modifier = Modifier,
     buttonStyle: ButtonStyle = ButtonStyle.Fill,
-    buttonColor: ButtonColor = ButtonColor.Yellow,
+    buttonColor: ButtonColor = ButtonColor.Black,
     buttonSize: ButtonSize = ButtonSize.Large,
     isLoading: Boolean = false,
     isEnable: Boolean = true,
@@ -86,7 +84,7 @@ fun FillButton(
             IconButton1(imageResource = imageResource)
             TextButton1(text = text, buttonSize = buttonSize)
         },
-        colors = fillButtonColor(buttonColor = buttonColor),
+        colors = fillButtonColor(),
         enabled = isEnable,
         shape = RoundedCornerShape(8.dp)
     )
@@ -109,9 +107,9 @@ fun OutlineButton(
             IconButton1(imageResource = imageResource)
             TextButton1(text = text, buttonSize = buttonSize)
         },
-        colors = outlineButtonColor(buttonColor = buttonColor),
+        colors = outlineButtonColor(),
         enabled = isEnable,
-        border = buttonBorder(buttonColor = buttonColor),
+        border = buttonBorder(),
         shape = RoundedCornerShape(8.dp)
     )
 }
@@ -149,13 +147,9 @@ private fun MyButton(
 }
 
 @Composable
-fun fillButtonColor(buttonColor: ButtonColor): ButtonColors {
+fun fillButtonColor(): ButtonColors {
     return ButtonDefaults.buttonColors(
-        backgroundColor = when (buttonColor) {
-            is ButtonColor.Yellow -> Color.Yellow
-            is ButtonColor.Green -> Color.Green
-            is ButtonColor.Red -> Color.Red
-        },
+        backgroundColor = Color.White,
         contentColor = Color.Yellow,
         disabledBackgroundColor = Color.White,
         disabledContentColor = Color.White
@@ -163,24 +157,16 @@ fun fillButtonColor(buttonColor: ButtonColor): ButtonColors {
 }
 
 @Composable
-fun outlineButtonColor(buttonColor: ButtonColor): ButtonColors {
+fun outlineButtonColor(): ButtonColors {
     return ButtonDefaults.outlinedButtonColors(
-        contentColor = when (buttonColor) {
-            is ButtonColor.Yellow -> Color.Yellow
-            is ButtonColor.Green -> Color.Green
-            is ButtonColor.Red -> Color.Red
-        },
+        contentColor = Color.Black,
         backgroundColor = Color.Green
     )
 }
 
 @Composable
-fun buttonBorder(buttonColor: ButtonColor): BorderStroke {
-    return BorderStroke(2.dp, when (buttonColor) {
-        is ButtonColor.Yellow -> Color.Yellow
-        is ButtonColor.Green -> Color.Green
-        is ButtonColor.Red -> Color.Red
-    })
+fun buttonBorder(): BorderStroke {
+    return BorderStroke(2.dp, Color.Red)
 }
 
 fun Modifier.buttonSize(buttonSize: ButtonSize): Modifier = composed {
@@ -219,6 +205,7 @@ fun textButtonSize(buttonSize: ButtonSize): TextUnit {
         is ButtonSize.Small -> 10.sp
         is ButtonSize.Medium -> 12.sp
         is ButtonSize.Large -> 14.sp
+        else ->  14.sp
     }
 }
 
@@ -229,7 +216,7 @@ fun PreviewButtonPrimaryYellow() {
         isLoading = false,
         onClick = { /*TODO*/ },
         text = "Button",
-        buttonColor = ButtonColor.Yellow,
+        buttonColor = ButtonColor.Black,
         isEnable = true,
         buttonStyle = ButtonStyle.Outline,
         buttonSize = ButtonSize.Large,

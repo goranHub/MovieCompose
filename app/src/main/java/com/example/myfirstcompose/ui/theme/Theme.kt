@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.myfirstcompose.ui.util.ui.CircularIndeterminateProgressBar
 import com.example.myfirstcompose.ui.util.ui.DefaultSnackbar
 
 private val DarkColorPalette = darkColors(

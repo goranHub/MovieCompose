@@ -1,6 +1,5 @@
 package com.example.myfirstcompose.ui.movie.details
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,12 +10,13 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.myfirstcompose.data.response.movie.MovieResponse
+import com.example.myfirstcompose.ui.movie.POSTER_URL
+import com.example.myfirstcompose.ui.movie.compose.MovieImage
 
 @Composable
 fun DetailsScreen(
@@ -33,38 +33,41 @@ fun DetailsScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .padding(10.dp)
+                .padding(10.dp),
         ) {
-  /*          Image(
-                painter = painterResource(id = movie.posterPath.toInt()),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(4.dp)),
-                contentScale = ContentScale.Fit
-            )*/
+            Column(
+                modifier =  Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                MovieImage(
+                    url = "$POSTER_URL${movie.posterPath}",
+                    blur = true,
+                    successContent = { painter, loadState ->
+                        Image(
+                            painter = painter,
+                            contentDescription = "",
+                            contentScale = ContentScale.FillBounds,
+                        )
+                    }
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-            //    text = movie.originalTitle,
-                text ="1",
+                text = movie.originalTitle,
                 style = MaterialTheme.typography.h3
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-             //   text = movie.overview,
-                text ="2",
+                text = movie.overview,
                 style = MaterialTheme.typography.h5
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-            //    text = "Original release : ${movie.releaseDate}",
-                text ="3",
+                text = "Original release : ${movie.releaseDate}",
                 style = MaterialTheme.typography.h5
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-            //    text = "IMDB : ${movie.popularity}",
-                text ="4",
+                text = "IMDB : ${movie.popularity}",
                 style = MaterialTheme.typography.h5
             )
 

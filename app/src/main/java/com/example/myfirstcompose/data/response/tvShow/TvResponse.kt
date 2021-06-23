@@ -1,4 +1,4 @@
-package mycom.learnsicoapp.movieapp.data.remote.response.tvShow
+package com.example.myfirstcompose.data.response.tvShow
 
 import com.google.gson.annotations.SerializedName
 

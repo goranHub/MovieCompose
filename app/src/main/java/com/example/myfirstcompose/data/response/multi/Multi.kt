@@ -1,4 +1,4 @@
-package mycom.learnsicoapp.movieapp.data.remote.response.multi
+package com.example.myfirstcompose.data.response.multi
 
 data class Multi(
     val page: Int,

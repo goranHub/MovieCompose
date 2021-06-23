@@ -6,15 +6,13 @@ import com.example.myfirstcompose.data.response.movie.TopMovieResponse
 import com.example.myfirstcompose.ui.movie.API_KEY
 import com.example.myfirstcompose.ui.util.Resource
 
-class Repository(val restApi: RestApi, val movieFetcher: MovieFetcher){
-
+class Repository(val restApi: RestApi, private val movieFetcher: MovieFetcher){
 
     suspend fun getMovieList(): Resource<TopMovieResponse> {
-        val response = try {
+        return try {
             movieFetcher.fetchMovie(API_KEY, 1, restApi)
-        } catch(e: Exception) {
-            return Resource.Error("An unknown error occured.")
+        } catch (e: Exception) {
+            return Resource.Error("An unknown error occurred.")
         }
-        return response
     }
 }

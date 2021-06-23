@@ -115,5 +115,15 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 
+    // 
+    def accompanist = "0.12.0"
+    implementation "com.google.accompanist:accompanist-insets:$accompanist"
+    implementation "com.google.accompanist:accompanist-coil:$accompanist"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist"
+    implementation "com.google.accompanist:accompanist-placeholder-material:$accompanist"
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
+    implementation 'com.github.ajalt:timberkt:1.5.1'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.10"
+
 }
 
